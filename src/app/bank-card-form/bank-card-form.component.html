@@ -1,0 +1,35 @@
+
+<form class="bank-card-form" [formGroup]="form" [class.bank-card-form-loading]="loading">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [formControl]="nameControl" required>
+    <mat-error *ngIf="!nameControl.valid">Please provide your name for billing purposes</mat-error>
+    <mat-hint>How do we call you</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Card number</mat-label>
+    <app-stripe-card-num matStripe [formControl]="cardNumberControl" [required]="true"></app-stripe-card-num>
+    <mat-error *ngIf="cardNumberControl.errors">{{ cardNumberControl.errors.message }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Expiry</mat-label>
+    <app-stripe-card-expiry matStripe [formControl]="expiryControl" [required]="true"></app-stripe-card-expiry>
+    <mat-error *ngIf="expiryControl.errors">{{ expiryControl.errors.message }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>CVC</mat-label>
+    <app-stripe-card-cvc matStripe [formControl]="cvcControl" [required]="true"></app-stripe-card-cvc>
+    <mat-error *ngIf="cvcControl.errors">{{ cvcControl.errors.message }}</mat-error>
+  </mat-form-field>
+
+  <button (click)="onPay()" [disabled]="!form.valid || form.pristine" color="primary" mat-flat-button>
+    Pay Now
+  </button>
+  <div class="bank-card-form-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</form>
+

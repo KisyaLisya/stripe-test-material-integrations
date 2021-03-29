@@ -1,0 +1,27 @@
+.bank-card-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+
+  width: 250px;
+
+  mat-form-field:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
+  .bank-card-form-spinner {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &.bank-card-form-loading {
+    .bank-card-form-spinner {
+      display: block;
+    }
+  }
+}
